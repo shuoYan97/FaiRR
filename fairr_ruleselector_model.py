@@ -44,9 +44,7 @@ class FaiRRRuleSelector(BaseModel):
 		self.classifier.bias.data.zero_()
 
 	def forward(self, input_ids, attn_mask):
-		last_hidden_state = self.text_encoder(input_ids=input_ids, attention_mask=attn_mask)['last_hidden_state'] #shape (batchsize, seqlen, hiddensize)
-		last_hidden_state = self.dropout(last_hidden_state)
-		logits            = self.classifier(last_hidden_state).squeeze()
+
 
 		return logits
 
