@@ -32,7 +32,7 @@ class FaiRRReasoner(BaseModel):
 		self.tokenizer = AutoTokenizer.from_pretrained(hf_name)
 
 	def forward(self, batch):
-		outputs = self.reasoner(input_ids=batch['all_inps'], attention_mask=batch['attn_mask'], decoder_input_ids=batch['y_ids'], labels=batch['labels'])
+
 
 		return outputs
 
