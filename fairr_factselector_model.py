@@ -41,14 +41,7 @@ class FaiRRFactSelector(BaseModel):
 		self.dropout = torch.nn.Dropout(self.text_encoder.config.hidden_dropout_prob)
 
 	def forward(self, batch):
-		attn_mask = batch['attn_mask']
-		last_hidden_state = self.text_encoder(input_ids=batch['all_sents'], attention_mask=attn_mask)['last_hidden_state'] #shape (batchsize, seqlen, hiddensize)
-		batchsize, seqlen, hiddensize = last_hidden_state.shape[0], last_hidden_state.shape[1], last_hidden_state.shape[2]
-		assert hiddensize == self.out_dim
-		last_hidden_state = last_hidden_state.reshape(-1, hiddensize)
-		last_hidden_state = self.dropout(last_hidden_state)
-		logits    	= self.classifier(last_hidden_state) #shape (-1, 1)
-		logits 		= logits.reshape(batchsize, seqlen) #shape (batchsize, seqlen)
+
 
 		return logits
 
